@@ -1,0 +1,29 @@
+{
+  "name": "Mahjong Solitaire",
+  "short_name": "Mahjong",
+  "description": "Play Mahjong Solitaire in your browser with classic tile matching and configurable layouts.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#16213e",
+  "icons": [
+    {
+      "src": "img/icons/mahjong32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icons/mahjong128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icons/mahjong256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

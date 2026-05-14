@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Play Mahjong Solitaire in your browser with classic tile matching and configurable layouts." />
+  <meta name="theme-color" content="#16213e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="icon" href="img/icons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="img/icons/mahjong128.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="AUTHOR" content="Oliver Merkel" />
+  <meta name="COPYRIGHT" content="Oliver Merkel" />
+  <title>Mahjong Solitaire</title>
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <header id="app-header">
+    <button id="btn-menu" class="icon-btn" type="button" aria-label="Open menu" aria-controls="side-panel">
+      <img src="img/icons/icon-bars.svg" alt="" />
+    </button>
+    <span id="app-header-title">Mahjong Solitaire</span>
+    <span id="app-header-badge" aria-label="Current settings" aria-live="polite">ClassicTurtle | Classic | Free On</span>
+  </header>
+
+  <main id="app-content">
+    <section id="view-game" class="view">
+      <noscript>
+        <p>This application requires JavaScript. Please enable it in your browser settings.</p>
+      </noscript>
+      <div id="game-board-container">
+        <div id="board"></div>
+        <div id="game-highscores" class="game-highscores" aria-label="Current highscores" aria-live="polite">
+          <div class="highscore-item"><span class="hs-label">Today:</span> <span class="hs-value" id="game-score-today">-</span></div>
+          <div class="highscore-item"><span class="hs-label">Week:</span> <span class="hs-value" id="game-score-week">-</span></div>
+          <div class="highscore-item"><span class="hs-label">Month:</span> <span class="hs-value" id="game-score-month">-</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-rules" class="view view-section" hidden>
+      <h2>Rules</h2>
+      <img src="./img/mah_jong_red_dragon.png" width="50%" />
+      <p><b>Mahjong Solitaire</b> is a single-player tile matching game played on a layered layout.</p>
+
+      <details>
+        <summary>Goal</summary>
+        <div>
+          <p>Remove all 144 tiles by matching legal pairs.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Legal Pair</summary>
+        <div>
+          <ol>
+            <li>Both tiles must be free: no tile directly on top and at least one side (left or right) open.</li>
+            <li>Tiles must belong to the same matching group.</li>
+            <li>Flowers match any flower. Seasons match any season.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details>
+        <summary>When Is a Tile Blocked?</summary>
+        <div>
+          <p>A tile is blocked and cannot be selected if any of the following apply:</p>
+          <ul>
+            <li><strong>Covered from above:</strong> Another tile sits on top of it — even partially. If any part of a tile's surface is overlapped by a tile on a higher layer, it is blocked.</li>
+            <li><strong>Squeezed on both sides:</strong> Tiles at the same level that are fully aligned block their left and right neighbors in the classic way. A tile is blocked when it has a direct neighbor on both its left and right side.</li>
+            <li><strong>Nudged from the side:</strong> Some tiles are placed slightly offset (half a tile up or down). These offset tiles reach into the space of their aligned neighbors. Any aligned tile that an offset tile overlaps from the side is blocked by it — but the offset tile itself is only blocked by tiles further out from the center.</li>
+          </ul>
+          <p>In short: a tile is free only when nothing covers it from above and it has at least one completely open side.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Layouts</summary>
+        <div>
+          <p>Default layout is <b>Classic Turtle</b>. Additional layouts: <b>Heart</b> and <b>Square</b>.</p>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Tile Types</summary>
+        <div id="tile-showcase" class="tile-showcase"></div>
+      </details>
+
+      <button class="btn btn-back" type="button">&#8592; Back</button>
+    </section>
+
+    <section id="view-options" class="view view-section" hidden>
+      <h2>Options</h2>
+      <p class="hint-text">Layout changes start a new game immediately when leaving options.</p>
+
+      <form class="options-form" id="options-form">
+        <fieldset>
+          <legend>Layout</legend>
+          <label><input type="radio" name="layout" value="ClassicTurtle" checked />Classic Turtle (default)</label>
+          <label><input type="radio" name="layout" value="Heart" />Heart</label>
+          <label><input type="radio" name="layout" value="Square" />Square</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Tile theme</legend>
+          <label><input type="radio" name="tiletheme" value="Classic" checked />Classic</label>
+          <label><input type="radio" name="tiletheme" value="Ink" />Ink</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Free tile highlights</legend>
+          <label><input type="radio" name="showfreetiles" value="On" checked />On</label>
+          <label><input type="radio" name="showfreetiles" value="Off" />Off</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Hint pair preview</legend>
+          <label><input type="radio" name="showhints" value="On" checked />On</label>
+          <label><input type="radio" name="showhints" value="Off" />Off</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Selection behavior</legend>
+          <label><input type="radio" name="selectionmode" value="Flexible" checked />Flexible (reselect allowed)</label>
+          <label><input type="radio" name="selectionmode" value="Locked" />Locked (must complete pair)</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Highscores (best moves)</legend>
+          <div class="highscore-grid" aria-live="polite">
+            <p>Today: <strong id="score-today">-</strong></p>
+            <button class="btn btn-secondary btn-highscore-reset" id="btn-reset-score-today" type="button">Reset Today</button>
+            <p>This Week: <strong id="score-week">-</strong></p>
+            <button class="btn btn-secondary btn-highscore-reset" id="btn-reset-score-week" type="button">Reset Week</button>
+            <p>This Month: <strong id="score-month">-</strong></p>
+            <button class="btn btn-secondary btn-highscore-reset" id="btn-reset-score-month" type="button">Reset Month</button>
+          </div>
+        </fieldset>
+      </form>
+
+      <button class="btn" id="btn-options-ok" type="button">OK</button>
+    </section>
+
+    <section id="view-about" class="view view-section" hidden>
+      <h2>About Mahjong Solitaire</h2>
+
+      <h3>Legal</h3>
+      <figure class="diagram" style="float:right;margin-left:12px;width:35%;">
+        <img src="img/oliver_5terre.jpg" alt="Oliver Merkel" />
+        <figcaption>
+          Oliver Merkel,
+          <a rel="license noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">cc-by-nc-nd 4.0</a>.
+        </figcaption>
+      </figure>
+      <p>
+        Copyright &copy; 2016, 2026<br />
+        <em>@author</em> Oliver Merkel, Merkel(dot)Oliver(at)web(dot)de.<br />
+        All rights reserved. Logos, brands, and trademarks belong to their respective owners.
+      </p>
+      <p>All source code (HTML, JavaScript, CSS) is released under the <strong>MIT License</strong>.</p>
+      <p>
+        If not otherwise stated, images are licensed under
+        <a rel="license noopener noreferrer" href="http://creativecommons.org/licenses/by-nc-sa/4.0" target="_blank">
+          Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+        </a>.
+      </p>
+
+      <details>
+        <summary>Third-party Code Licenses</summary>
+        <div>
+          <p>This version uses <strong>no third-party runtime libraries</strong>.</p>
+        </div>
+      </details>
+
+      <button class="btn btn-back" type="button">&#8592; Back</button>
+    </section>
+  </main>
+
+</div>
+
+<div id="panel-overlay" hidden></div>
+
+<nav id="side-panel" aria-label="Main navigation">
+  <p class="panel-title">Mahjong Solitaire</p>
+  <ul class="panel-nav">
+    <li><button id="btn-panel-close" type="button">&#10005; Close</button></li>
+    <li class="panel-divider" role="separator"></li>
+    <li><button id="nav-new" type="button">&#9654; New Game</button></li>
+    <li class="panel-divider" role="separator"></li>
+    <li><button id="nav-rules" type="button">Rules&hellip;</button></li>
+    <li><button id="nav-options" type="button">Options&hellip;</button></li>
+    <li><button id="nav-about" type="button">About&hellip;</button></li>
+  </ul>
+</nav>
+
+<script type="module" src="js/hmi.js"></script>
+
+</body>
+</html>
