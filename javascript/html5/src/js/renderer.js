@@ -209,7 +209,7 @@ const createTileGraphics = (face, palette, theme = 'Classic') => {
   } else if (face.startsWith('S')) {
     const seasons = ['🌸', '🌞', '🍂', '❄'];
     const seasonNum = parseInt(face[1]);
-    g.appendChild(svgEl('text', { x: cx, y: cy + 14, 'text-anchor': 'middle', style: `font:38px Arial;pointer-events:none;` })).textContent = seasons[seasonNum - 1];
+    g.appendChild(svgEl('text', { x: cx, y: cy + 8, 'text-anchor': 'middle', 'dominant-baseline': 'middle', style: 'font:52px Arial;pointer-events:none;' })).textContent = seasons[seasonNum - 1];
   }
 
   return g;
