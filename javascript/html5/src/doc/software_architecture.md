@@ -61,6 +61,21 @@ Core goals:
 - Completion time is measured from `firstMoveTime` until board clear (`isWon`).
 - Scores are period-based and layout-aware in display and update logic.
 
+### 2.5 Progressive Web App (PWA)
+
+- **Web App Manifest** (`manifest.json`): Defines app metadata (name, icons, display mode, colors).
+- **Service Worker** (`js/sw.js`):
+  - Caches static assets on first visit (install phase).
+  - Implements network-first fetch strategy with cache fallback for offline support.
+  - Cleans up old cache versions on activation.
+- **Installation**: Users can install the app on home screen (mobile) or as a standalone app (desktop).
+- **Offline capability**: Once installed and cached, the game functions without internet connectivity.
+- **Meta tags** (`index.html`):
+  - `viewport`: Responsive design support.
+  - `apple-mobile-web-app-capable`: iOS app-like experience.
+  - `apple-mobile-web-app-status-bar-style`: Status bar styling for iOS.
+  - `manifest`: Link to web app manifest.
+
 ## 3. Dependency Diagram
 
 ```mermaid
@@ -71,11 +86,13 @@ flowchart TB
     STORE[js/store.js]
     RENDER[js/renderer.js]
     LS[(localStorage)]
+    SW[js/sw.js]
 
     IDX --> HMI
     HMI --> STORE
     HMI --> RENDER
     HMI <--> LS
+    HMI -.registerServiceWorker.-> SW
   end
 
   subgraph WORKER[Worker Thread]

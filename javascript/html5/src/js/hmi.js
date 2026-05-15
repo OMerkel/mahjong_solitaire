@@ -571,10 +571,29 @@ const wireUI = () => {
   sendToEngine('start');
 };
 
+// Register service worker for PWA support
+const registerServiceWorker = () => {
+  if (!navigator.serviceWorker) {
+    console.info('Service Worker not supported in this browser');
+    return;
+  }
+  navigator.serviceWorker.register('js/sw.js')
+    .then((registration) => {
+      console.info('Service Worker registered successfully:', registration);
+    })
+    .catch((error) => {
+      console.warn('Service Worker registration failed:', error);
+    });
+};
+
 export { saveSettingsToStorage, restoreSettingsFromStorage };
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', wireUI);
+  document.addEventListener('DOMContentLoaded', () => {
+    wireUI();
+    registerServiceWorker();
+  });
 } else {
   wireUI();
+  registerServiceWorker();
 }

@@ -36,6 +36,30 @@ node tests/server.js
 
 Open [http://localhost:4173](http://localhost:4173).
 
+### Progressive Web App (PWA)
+
+Mahjong Solitaire is a Progressive Web App, allowing you to:
+
+- **Install** the app on your device (desktop, tablet, mobile).
+- **Play offline** — cached assets ensure the game works without internet.
+- **Fast load times** — Service Worker caching optimizes performance.
+
+#### How to Install
+
+1. Open the game in a modern browser (Chrome, Firefox, Edge, Safari on iOS 16.4+).
+2. Look for the **Install** prompt in the address bar or browser menu:
+   - **Desktop (Chrome/Edge)**: Click the install icon in the address bar.
+   - **Mobile**: Open the browser menu and select "Add to Home Screen" or "Install app".
+   - **Desktop (Firefox)**: Add a desktop shortcut manually.
+3. The app will install with a native look and feel.
+
+#### Features
+
+- **Offline play**: Once installed and cached, play without an internet connection.
+- **Home screen icon**: Launch from your device's home screen or applications menu.
+- **Standalone window**: Opens in its own window, not as a browser tab.
+- **Data persistence**: Your settings and highscores are saved locally on your device.
+
 ## Test Commands
 
 Unit tests:
