@@ -324,10 +324,10 @@ const recordCompletedGame = (board) => {
   // Update the status message
   const statusMessage = `Amazing! You solved it in ${formatScore(elapsedSeconds)}!`;
   const highscoreMessage = newHighscorePeriods.length > 0
-    ? ` 🎉 You've set a blazing new highscore for ${newHighscorePeriods.join(', ')}! Keep it up, champion!`
+    ? ` 🎉 A new highscore for ${newHighscorePeriods.join(', ')}!`
     : ' Fantastic effort! Keep pushing for new records!';
 
-  renderer.updateStatus(board, `${statusMessage}${highscoreMessage}`);
+  renderer.updateStatus(board, `${statusMessage}\n${highscoreMessage}`);
 };
 
 const resetHighscore = (period) => {

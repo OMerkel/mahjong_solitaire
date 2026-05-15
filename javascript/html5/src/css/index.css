@@ -108,9 +108,9 @@ ul { list-style: none; }
 }
 
 .game-highscores {
-  position: absolute;
-  top: 12px;
-  right: 12px;
+  position: fixed;
+  top: 52px;
+  right: 24px;
   background: rgba(22, 33, 62, 0.82);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
