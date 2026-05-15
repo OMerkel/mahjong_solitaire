@@ -17,7 +17,7 @@
   --color-text-dim: #888;
   --color-gold:     #ffcc00;
 
-  --header-h:       52px;
+  --header-h:       40px;
   --panel-w:        260px;
   --radius:         8px;
   --transition:     0.25s ease;
@@ -70,7 +70,7 @@ ul { list-style: none; }
 }
 
 #app-header-title {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   flex: 1;
@@ -208,7 +208,7 @@ ul { list-style: none; }
   overflow: hidden;
   border-radius: var(--radius);
   box-shadow: 0 4px 24px rgba(0,0,0,.6);
-  transform: translateX(-80px);
+  margin-inline: auto;
 }
 
 #board svg {
@@ -287,12 +287,12 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border: none;
   background: transparent;
   cursor: pointer;
-  padding: 4px;
+  padding: 3px;
   border-radius: 50%;
   flex-shrink: 0;
   transition: background var(--transition);
@@ -302,8 +302,8 @@ ul { list-style: none; }
 
 .icon-btn img,
 .icon-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   filter: invert(1);
 }
 
@@ -494,4 +494,35 @@ figure.diagram figcaption {
   #app-header-title { font-size: 1rem; }
   #app-header-badge { font-size: 0.65rem; padding: 3px 8px; }
   .view { padding: 8px 10px; }
+
+  .game-highscores {
+    top: auto;
+    right: auto;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 16px);
+    max-width: 360px;
+    padding: 6px 8px;
+    font-size: 0.72rem;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+    background: rgba(22, 33, 62, 0.74);
+  }
+
+  .highscore-item {
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .hs-label,
+  .hs-value {
+    font-size: 0.72rem;
+  }
+
+  .hs-value {
+    min-width: 0;
+    text-align: left;
+  }
 }

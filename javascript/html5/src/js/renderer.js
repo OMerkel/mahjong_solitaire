@@ -59,68 +59,70 @@ const createTileGraphics = (face, palette, theme = 'Classic') => {
       const lightColor = palette.fill;
       const accentColor = theme === 'Ink' ? '#f59e0b' : '#fbbf24'; // Warm amber/gold
       const wingshadow = theme === 'Ink' ? '#4c1d95' : '#166534'; // Darker wing tone
+      const bx = cx + 6;
+      const by = cy;
       
       // Back/rump - darker shaded area
-      g.appendChild(svgEl('ellipse', { cx: cx - 8, cy: cy - 2, rx: 8, ry: 10, fill: wingshadow, opacity: '0.7' }));
+      g.appendChild(svgEl('ellipse', { cx: bx - 8, cy: by - 2, rx: 8, ry: 10, fill: wingshadow, opacity: '0.7' }));
       
       // Main body - teardrop ellipse
-      g.appendChild(svgEl('ellipse', { cx: cx + 2, cy: cy + 4, rx: 14, ry: 17, fill: darkColor, opacity: '0.95' }));
+      g.appendChild(svgEl('ellipse', { cx: bx + 2, cy: by + 4, rx: 14, ry: 17, fill: darkColor, opacity: '0.95' }));
       
       // Breast/underside - lighter cream color
-      g.appendChild(svgEl('ellipse', { cx: cx + 4, cy: cy + 8, rx: 9, ry: 12, fill: accentColor, opacity: '0.4' }));
+      g.appendChild(svgEl('ellipse', { cx: bx + 4, cy: by + 8, rx: 9, ry: 12, fill: accentColor, opacity: '0.4' }));
       
       // Wing - large curved filled shape
-      g.appendChild(svgEl('path', { d: `M ${cx - 8} ${cy - 4} Q ${cx - 28} ${cy - 8} ${cx - 30} ${cy + 10} Q ${cx - 20} ${cy + 18} ${cx - 6} ${cy + 12}`, stroke: darkColor, 'stroke-width': 0.5, fill: wingshadow, opacity: '0.85' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 8} ${by - 4} Q ${bx - 28} ${by - 8} ${bx - 30} ${by + 10} Q ${bx - 20} ${by + 18} ${bx - 6} ${by + 12}`, stroke: darkColor, 'stroke-width': 0.5, fill: wingshadow, opacity: '0.85' }));
       
       // Wing feather detail - stripes
-      g.appendChild(svgEl('path', { d: `M ${cx - 15} ${cy} Q ${cx - 22} ${cy - 2} ${cx - 24} ${cy + 4}`, stroke: darkColor, 'stroke-width': 1.5, fill: 'none', opacity: '0.6' }));
-      g.appendChild(svgEl('path', { d: `M ${cx - 12} ${cy + 2} Q ${cx - 20} ${cy + 2} ${cx - 22} ${cy + 10}`, stroke: darkColor, 'stroke-width': 1.5, fill: 'none', opacity: '0.6' }));
-      g.appendChild(svgEl('path', { d: `M ${cx - 10} ${cy + 6} Q ${cx - 18} ${cy + 8} ${cx - 20} ${cy + 14}`, stroke: darkColor, 'stroke-width': 1.5, fill: 'none', opacity: '0.6' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 15} ${by} Q ${bx - 22} ${by - 2} ${bx - 24} ${by + 4}`, stroke: darkColor, 'stroke-width': 1.5, fill: 'none', opacity: '0.6' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 12} ${by + 2} Q ${bx - 20} ${by + 2} ${bx - 22} ${by + 10}`, stroke: darkColor, 'stroke-width': 1.5, fill: 'none', opacity: '0.6' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 10} ${by + 6} Q ${bx - 18} ${by + 8} ${bx - 20} ${by + 14}`, stroke: darkColor, 'stroke-width': 1.5, fill: 'none', opacity: '0.6' }));
       
       // Neck - curved bridge
-      g.appendChild(svgEl('path', { d: `M ${cx + 8} ${cy - 8} Q ${cx + 12} ${cy - 14} ${cx + 14} ${cy - 20}`, stroke: darkColor, 'stroke-width': 4, fill: 'none', 'stroke-linecap': 'round' }));
+      g.appendChild(svgEl('path', { d: `M ${bx + 8} ${by - 8} Q ${bx + 12} ${by - 14} ${bx + 14} ${by - 20}`, stroke: darkColor, 'stroke-width': 4, fill: 'none', 'stroke-linecap': 'round' }));
       
       // Head - side profile circle
-      g.appendChild(svgEl('circle', { cx: cx + 16, cy: cy - 22, r: 9, fill: darkColor }));
+      g.appendChild(svgEl('circle', { cx: bx + 16, cy: by - 22, r: 9, fill: darkColor }));
       
       // Head crest/crown detail
-      g.appendChild(svgEl('path', { d: `M ${cx + 18} ${cy - 31} L ${cx + 22} ${cy - 28} L ${cx + 20} ${cy - 26}`, stroke: darkColor, 'stroke-width': 2, fill: darkColor, 'stroke-linejoin': 'round' }));
+      g.appendChild(svgEl('path', { d: `M ${bx + 18} ${by - 31} L ${bx + 22} ${by - 28} L ${bx + 20} ${by - 26}`, stroke: darkColor, 'stroke-width': 2, fill: darkColor, 'stroke-linejoin': 'round' }));
       
       // Head highlight/cap
-      g.appendChild(svgEl('ellipse', { cx: cx + 14, cy: cy - 24, rx: 3, ry: 4, fill: accentColor, opacity: '0.5' }));
+      g.appendChild(svgEl('ellipse', { cx: bx + 14, cy: by - 24, rx: 3, ry: 4, fill: accentColor, opacity: '0.5' }));
       
       // Eye - large and expressive
-      g.appendChild(svgEl('circle', { cx: cx + 20, cy: cy - 22, r: 3, fill: '#fff' }));
-      g.appendChild(svgEl('circle', { cx: cx + 21, cy: cy - 23, r: 1.8, fill: '#000' }));
+      g.appendChild(svgEl('circle', { cx: bx + 20, cy: by - 22, r: 3, fill: '#fff' }));
+      g.appendChild(svgEl('circle', { cx: bx + 21, cy: by - 23, r: 1.8, fill: '#000' }));
       
       // Beak - pointed triangle pointing right
-      g.appendChild(svgEl('polygon', { points: `${cx + 22},${cy - 20} ${cx + 32},${cy - 18} ${cx + 22},${cy - 16}`, fill: '#d97706' }));
-      g.appendChild(svgEl('polygon', { points: `${cx + 22},${cy - 20} ${cx + 32},${cy - 18} ${cx + 22},${cy - 16}`, stroke: '#b45309', 'stroke-width': 0.5, fill: 'none' }));
+      g.appendChild(svgEl('polygon', { points: `${bx + 22},${by - 20} ${bx + 32},${by - 18} ${bx + 22},${by - 16}`, fill: '#d97706' }));
+      g.appendChild(svgEl('polygon', { points: `${bx + 22},${by - 20} ${bx + 32},${by - 18} ${bx + 22},${by - 16}`, stroke: '#b45309', 'stroke-width': 0.5, fill: 'none' }));
       
       // Tail - fan of feathers extending left and down
       // Tail base
-      g.appendChild(svgEl('path', { d: `M ${cx - 22} ${cy + 8} L ${cx - 38} ${cy + 10}`, stroke: darkColor, 'stroke-width': 4, 'stroke-linecap': 'round' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 20} ${by + 8} L ${bx - 32} ${by + 10}`, stroke: darkColor, 'stroke-width': 4, 'stroke-linecap': 'round' }));
       // Upper tail feather
-      g.appendChild(svgEl('path', { d: `M ${cx - 22} ${cy + 4} Q ${cx - 32} ${cy - 2} ${cx - 40} ${cy - 4}`, stroke: darkColor, 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' }));
-      g.appendChild(svgEl('path', { d: `M ${cx - 22} ${cy + 4} Q ${cx - 32} ${cy - 2} ${cx - 40} ${cy - 4}`, stroke: accentColor, 'stroke-width': 1, fill: 'none', 'stroke-linecap': 'round', opacity: '0.6' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 20} ${by + 4} Q ${bx - 28} ${by - 2} ${bx - 34} ${by - 4}`, stroke: darkColor, 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 20} ${by + 4} Q ${bx - 28} ${by - 2} ${bx - 34} ${by - 4}`, stroke: accentColor, 'stroke-width': 1, fill: 'none', 'stroke-linecap': 'round', opacity: '0.6' }));
       
       // Middle tail feather
-      g.appendChild(svgEl('path', { d: `M ${cx - 22} ${cy + 8} Q ${cx - 36} ${cy + 12} ${cx - 44} ${cy + 16}`, stroke: darkColor, 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' }));
-      g.appendChild(svgEl('path', { d: `M ${cx - 22} ${cy + 8} Q ${cx - 36} ${cy + 12} ${cx - 44} ${cy + 16}`, stroke: accentColor, 'stroke-width': 1, fill: 'none', 'stroke-linecap': 'round', opacity: '0.6' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 20} ${by + 8} Q ${bx - 32} ${by + 12} ${bx - 38} ${by + 16}`, stroke: darkColor, 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 20} ${by + 8} Q ${bx - 32} ${by + 12} ${bx - 38} ${by + 16}`, stroke: accentColor, 'stroke-width': 1, fill: 'none', 'stroke-linecap': 'round', opacity: '0.6' }));
       
       // Lower tail feather
-      g.appendChild(svgEl('path', { d: `M ${cx - 22} ${cy + 12} Q ${cx - 32} ${cy + 22} ${cx - 40} ${cy + 28}`, stroke: darkColor, 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' }));
-      g.appendChild(svgEl('path', { d: `M ${cx - 22} ${cy + 12} Q ${cx - 32} ${cy + 22} ${cx - 40} ${cy + 28}`, stroke: accentColor, 'stroke-width': 1, fill: 'none', 'stroke-linecap': 'round', opacity: '0.6' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 20} ${by + 12} Q ${bx - 28} ${by + 22} ${bx - 34} ${by + 28}`, stroke: darkColor, 'stroke-width': 3, fill: 'none', 'stroke-linecap': 'round' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 20} ${by + 12} Q ${bx - 28} ${by + 22} ${bx - 34} ${by + 28}`, stroke: accentColor, 'stroke-width': 1, fill: 'none', 'stroke-linecap': 'round', opacity: '0.6' }));
       
       // Legs - thin and realistic
-      g.appendChild(svgEl('path', { d: `M ${cx - 4} ${cy + 21} L ${cx - 4} ${cy + 32}`, stroke: '#8b6f47', 'stroke-width': 2, 'stroke-linecap': 'round' }));
-      g.appendChild(svgEl('path', { d: `M ${cx + 6} ${cy + 21} L ${cx + 6} ${cy + 32}`, stroke: '#8b6f47', 'stroke-width': 2, 'stroke-linecap': 'round' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 4} ${by + 21} L ${bx - 4} ${by + 32}`, stroke: '#8b6f47', 'stroke-width': 2, 'stroke-linecap': 'round' }));
+      g.appendChild(svgEl('path', { d: `M ${bx + 6} ${by + 21} L ${bx + 6} ${by + 32}`, stroke: '#8b6f47', 'stroke-width': 2, 'stroke-linecap': 'round' }));
       
       // Feet - simple three-toe marks
-      g.appendChild(svgEl('path', { d: `M ${cx - 6} ${cy + 32} L ${cx - 2} ${cy + 32}`, stroke: '#8b6f47', 'stroke-width': 1.5, 'stroke-linecap': 'round' }));
-      g.appendChild(svgEl('path', { d: `M ${cx + 4} ${cy + 32} L ${cx + 8} ${cy + 32}`, stroke: '#8b6f47', 'stroke-width': 1.5, 'stroke-linecap': 'round' }));
-      g.appendChild(svgEl('circle', { cx: cx - 4, cy: cy + 33, r: 1, fill: '#8b6f47' }));
-      g.appendChild(svgEl('circle', { cx: cx + 6, cy: cy + 33, r: 1, fill: '#8b6f47' }));
+      g.appendChild(svgEl('path', { d: `M ${bx - 6} ${by + 32} L ${bx - 2} ${by + 32}`, stroke: '#8b6f47', 'stroke-width': 1.5, 'stroke-linecap': 'round' }));
+      g.appendChild(svgEl('path', { d: `M ${bx + 4} ${by + 32} L ${bx + 8} ${by + 32}`, stroke: '#8b6f47', 'stroke-width': 1.5, 'stroke-linecap': 'round' }));
+      g.appendChild(svgEl('circle', { cx: bx - 4, cy: by + 33, r: 1, fill: '#8b6f47' }));
+      g.appendChild(svgEl('circle', { cx: bx + 6, cy: by + 33, r: 1, fill: '#8b6f47' }));
     } else if (num === 8) {
       // B8: Like other bamboo but with more sophisticated layout
       const layouts = {
