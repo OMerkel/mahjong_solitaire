@@ -38,7 +38,7 @@ Core goals:
   - selected tile outline;
   - free-tile highlight (optional);
   - hint pair highlight (optional).
-- Tile themes: `Classic`, `Ink`.
+- Tile themes: `Classic`, `Classic 2`, `Ink`.
 - Responsive board scaling with CSS and SVG viewBox.
 
 ### 2.3 UI, Settings, and Persistence
@@ -149,7 +149,7 @@ classDiagram
     +showFreeTiles: On|Off
     +showHints: On|Off
     +selectionMode: Flexible|Locked
-    +tileTheme: Classic|Ink
+    +tileTheme: Classic|Classic 2|Ink
   }
 
   Tile --> BoardState

@@ -6,7 +6,7 @@ Mahjong Solitaire for the browser, using ES modules and a worker-backed game eng
 
 - Legal move generation for free-tile matching.
 - Layout options: Classic Turtle (default), Heart, Square.
-- Tile themes: Classic, Ink.
+- Tile themes: Classic, Classic 2, Ink.
 - Highscores persisted for:
   - Today
   - This Week

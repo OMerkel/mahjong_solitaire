@@ -14,25 +14,25 @@
  * @returns {{ getState, dispatch, subscribe }}
  */
 export const createStore = (reducer, initialState) => {
-  let state       = initialState;
-  const listeners = new Set();
+	let state = initialState;
+	const listeners = new Set();
 
-  const getState = () => state;
+	const getState = () => state;
 
-  const dispatch = (action) => {
-    state = reducer(state, action);
-    listeners.forEach((fn) => {
-      fn(state, action);
-    });
-  };
+	const dispatch = (action) => {
+		state = reducer(state, action);
+		listeners.forEach((fn) => {
+			fn(state, action);
+		});
+	};
 
-  /** Subscribe to every state change.  Returns an unsubscribe function. */
-  const subscribe = (fn) => {
-    listeners.add(fn);
-    return () => listeners.delete(fn);
-  };
+	/** Subscribe to every state change.  Returns an unsubscribe function. */
+	const subscribe = (fn) => {
+		listeners.add(fn);
+		return () => listeners.delete(fn);
+	};
 
-  return { getState, dispatch, subscribe };
+	return { getState, dispatch, subscribe };
 };
 
 // ---------------------------------------------------------------------------
@@ -40,13 +40,13 @@ export const createStore = (reducer, initialState) => {
 // ---------------------------------------------------------------------------
 
 export const Actions = Object.freeze({
-  NAVIGATE:            'NAVIGATE',
-  ENGINE_BOARD_UPDATE: 'ENGINE_BOARD_UPDATE',
-  HUMAN_TURN_READY:    'HUMAN_TURN_READY',
-  SELECT_SOURCE:       'SELECT_SOURCE',
-  AI_THINKING:         'AI_THINKING',
-  SETTINGS_CHANGE:     'SETTINGS_CHANGE',
-  NEW_GAME:            'NEW_GAME',
+	NAVIGATE: "NAVIGATE",
+	ENGINE_BOARD_UPDATE: "ENGINE_BOARD_UPDATE",
+	HUMAN_TURN_READY: "HUMAN_TURN_READY",
+	SELECT_SOURCE: "SELECT_SOURCE",
+	AI_THINKING: "AI_THINKING",
+	SETTINGS_CHANGE: "SETTINGS_CHANGE",
+	NEW_GAME: "NEW_GAME",
 });
 
 // ---------------------------------------------------------------------------
@@ -58,55 +58,68 @@ export const Actions = Object.freeze({
  * `board` is the raw board-state plain-object received from the worker.
  */
 export const initialAppState = {
-  view:              'game',    // 'game' | 'rules' | 'options' | 'about'
-  board:             null,
-  selectableActions: [],
-  freeTileIds:       [],
-  selectedTileId:    null,
-  phase:             'idle',
-  settings: {
-    layout:          'ClassicTurtle',
-    showFreeTiles:   'On',
-    showHints:       'On',
-    selectionMode:   'Flexible',
-    tileTheme:       'Classic',
-  },
+	view: "game", // 'game' | 'rules' | 'options' | 'about'
+	board: null,
+	selectableActions: [],
+	freeTileIds: [],
+	selectedTileId: null,
+	phase: "idle",
+	settings: {
+		layout: "ClassicTurtle",
+		showFreeTiles: "On",
+		showHints: "On",
+		selectionMode: "Flexible",
+		tileTheme: "Classic",
+	},
 };
 
 export const appReducer = (state, action) => {
-  if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production' && !(action.type in Actions)) {
-    console.warn(`Unknown action type: ${action.type}. Valid types are:`, Object.keys(Actions));
-  }
-  switch (action.type) {
-    case Actions.NAVIGATE:
-      return { ...state, view: action.view };
+	if (
+		typeof process !== "undefined" &&
+		process.env.NODE_ENV !== "production" &&
+		!(action.type in Actions)
+	) {
+		console.warn(
+			`Unknown action type: ${action.type}. Valid types are:`,
+			Object.keys(Actions),
+		);
+	}
+	switch (action.type) {
+		case Actions.NAVIGATE:
+			return { ...state, view: action.view };
 
-    case Actions.ENGINE_BOARD_UPDATE:
-      return { ...state, board: action.board, phase: 'idle' };
+		case Actions.ENGINE_BOARD_UPDATE:
+			return { ...state, board: action.board, phase: "idle" };
 
-    case Actions.HUMAN_TURN_READY:
-      return {
-        ...state,
-        board: action.board,
-        selectableActions: action.selectableActions,
-        freeTileIds: action.freeTileIds,
-        selectedTileId: null,
-        phase: 'human_turn',
-      };
+		case Actions.HUMAN_TURN_READY:
+			return {
+				...state,
+				board: action.board,
+				selectableActions: action.selectableActions,
+				freeTileIds: action.freeTileIds,
+				selectedTileId: null,
+				phase: "human_turn",
+			};
 
-    case Actions.SELECT_SOURCE:
-      return { ...state, selectedTileId: action.source };
+		case Actions.SELECT_SOURCE:
+			return { ...state, selectedTileId: action.source };
 
-    case Actions.AI_THINKING:
-      return { ...state, selectedTileId: null, phase: 'idle' };
+		case Actions.AI_THINKING:
+			return { ...state, selectedTileId: null, phase: "idle" };
 
-    case Actions.SETTINGS_CHANGE:
-      return { ...state, settings: { ...state.settings, ...action.settings } };
+		case Actions.SETTINGS_CHANGE:
+			return { ...state, settings: { ...state.settings, ...action.settings } };
 
-    case Actions.NEW_GAME:
-      return { ...state, phase: 'idle', selectableActions: [], freeTileIds: [], selectedTileId: null };
+		case Actions.NEW_GAME:
+			return {
+				...state,
+				phase: "idle",
+				selectableActions: [],
+				freeTileIds: [],
+				selectedTileId: null,
+			};
 
-    default:
-      return state;
-  }
+		default:
+			return state;
+	}
 };

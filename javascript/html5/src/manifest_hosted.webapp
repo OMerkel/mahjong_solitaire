@@ -1,22 +1,22 @@
 {
-  "version": "0.7",
-  "name": "Mahjong Solitaire",
-  "description": "Mahjong Solitaire with classic layered tile matching",
-  "launch_path": "/mahjong/html5/src/index.html",
-  "orientation": "landscape-primary",
-  "icons": {
-    "32": "/mahjong/html5/src/img/icons/mahjong32.png",
-    "48": "/mahjong/html5/src/img/icons/mahjong48.png",
-    "60": "/mahjong/html5/src/img/icons/mahjong60.png",
-    "64": "/mahjong/html5/src/img/icons/mahjong64.png",
-    "90": "/mahjong/html5/src/img/icons/mahjong90.png",
-    "120": "/mahjong/html5/src/img/icons/mahjong120.png",
-    "128": "/mahjong/html5/src/img/icons/mahjong128.png",
-    "256": "/mahjong/html5/src/img/icons/mahjong256.png"
-  },
-  "developer": {
-    "name": "Oliver Merkel",
-    "url": "https://github.com/OMerkel/mahjong"
-  },
-  "installs_allowed_from": ["*"]
+	"version": "0.7",
+	"name": "Mahjong Solitaire",
+	"description": "Mahjong Solitaire with classic layered tile matching",
+	"launch_path": "/mahjong/html5/src/index.html",
+	"orientation": "landscape-primary",
+	"icons": {
+		"32": "/mahjong/html5/src/img/icons/mahjong32.png",
+		"48": "/mahjong/html5/src/img/icons/mahjong48.png",
+		"60": "/mahjong/html5/src/img/icons/mahjong60.png",
+		"64": "/mahjong/html5/src/img/icons/mahjong64.png",
+		"90": "/mahjong/html5/src/img/icons/mahjong90.png",
+		"120": "/mahjong/html5/src/img/icons/mahjong120.png",
+		"128": "/mahjong/html5/src/img/icons/mahjong128.png",
+		"256": "/mahjong/html5/src/img/icons/mahjong256.png"
+	},
+	"developer": {
+		"name": "Oliver Merkel",
+		"url": "https://github.com/OMerkel/mahjong"
+	},
+	"installs_allowed_from": ["*"]
 }

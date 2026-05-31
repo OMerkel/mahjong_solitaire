@@ -9,7 +9,7 @@ Browser-based Mahjong Solitaire implemented with modern JavaScript ES modules, f
 - Legal single-player Mahjong Solitaire with deterministic, seed-based board generation.
 - Three playable layouts: Classic Turtle, Heart, and Square.
 - Rule engine with top blocking, side blocking, and partial-overlap blocking semantics.
-- Two tile themes (Classic, Ink), optional free-tile highlighting, and optional hinting.
+- Three tile themes (Classic, Classic 2, Ink), optional free-tile highlighting, and optional hinting.
 - Selection modes: Flexible (reselect allowed) and Locked.
 - Persistent settings in localStorage.
 - Time-based highscores for Today, This Week, and This Month:
