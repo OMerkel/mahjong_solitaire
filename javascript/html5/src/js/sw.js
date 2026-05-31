@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 // Service Worker for Mahjong Solitaire PWA
 
-const CACHE_NAME = "mahjong-solitaire-v1";
+const CACHE_NAME = "mahjong-solitaire-v2";
 const ASSETS_TO_CACHE = [
 	"./",
 	"./index.html",

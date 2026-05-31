@@ -547,12 +547,19 @@ const wireUI = () => {
 	const overlay = document.getElementById("panel-overlay");
 
 	const openPanel = () => {
-		panel.classList.add("open");
-		overlay.hidden = false;
+		panel?.classList.add("open");
+		if (overlay) overlay.hidden = false;
 	};
 	const closePanel = () => {
-		panel.classList.remove("open");
-		overlay.hidden = true;
+		panel?.classList.remove("open");
+		if (overlay) overlay.hidden = true;
+	};
+
+	const navigateTo = (view) => {
+		// Keep a direct UI fallback so navigation still works even if later
+		// state/render updates throw.
+		showView(view);
+		store.dispatch({ type: Actions.NAVIGATE, view });
 	};
 
 	const applySettingsFromOptions = ({ restart = false } = {}) => {
@@ -583,28 +590,30 @@ const wireUI = () => {
 		const currentView = store.getState().view;
 		if (currentView === "options") {
 			applySettingsFromOptions();
-			store.dispatch({ type: Actions.NAVIGATE, view: "game" });
+			navigateTo("game");
 			return;
 		}
 		if (currentView === "rules" || currentView === "about") {
-			store.dispatch({ type: Actions.NAVIGATE, view: "game" });
+			navigateTo("game");
 		}
 	};
 
 	menuBtn?.addEventListener("click", openPanel);
 	closeBtn?.addEventListener("click", closePanelAndReturnToGame);
-	overlay?.addEventListener("click", closePanelAndReturnToGame);
+	overlay?.addEventListener("click", closePanel);
 
 	document.getElementById("nav-new")?.addEventListener("click", () => {
 		saveSettingsToStorage();
 		applySettingsFromOptions({ restart: true });
 		closePanel();
-		store.dispatch({ type: Actions.NAVIGATE, view: "game" });
+		navigateTo("game");
 	});
 
-	const navTo = (view) => () => {
+	const navTo = (view) => (event) => {
+		event?.preventDefault();
+		event?.stopPropagation();
 		closePanel();
-		store.dispatch({ type: Actions.NAVIGATE, view });
+		navigateTo(view);
 	};
 	document.getElementById("nav-rules")?.addEventListener("click", () => {
 		const currentTheme = readSettings().tiletheme ?? "Classic";
@@ -620,15 +629,13 @@ const wireUI = () => {
 		?.addEventListener("click", navTo("about"));
 
 	document.querySelectorAll(".btn-back").forEach((btn) => {
-		btn.addEventListener("click", () =>
-			store.dispatch({ type: Actions.NAVIGATE, view: "game" }),
-		);
+		btn.addEventListener("click", () => navigateTo("game"));
 	});
 
 	document.getElementById("btn-options-ok")?.addEventListener("click", () => {
 		saveSettingsToStorage();
 		applySettingsFromOptions();
-		store.dispatch({ type: Actions.NAVIGATE, view: "game" });
+		navigateTo("game");
 	});
 
 	document

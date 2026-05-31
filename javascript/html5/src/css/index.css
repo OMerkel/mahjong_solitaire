@@ -6,6 +6,13 @@
 	display: none;
 }
 
+#view-game[hidden],
+#view-rules[hidden],
+#view-options[hidden],
+#view-about[hidden] {
+	display: none;
+}
+
 /* =========================================================================
    CSS custom properties (design tokens)
    ========================================================================= */

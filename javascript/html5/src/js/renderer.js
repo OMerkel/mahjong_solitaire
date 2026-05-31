@@ -729,6 +729,8 @@ const createTileGraphics = (face, palette, theme = "Classic") => {
 			}
 			for (let i = 0; i < layout.length; i++) {
 				const [dx, dy] = layout[i];
+				// Classic 2: D1 single disc is large and ornamented
+				const isFancyDiscD1 = theme === "Classic 2" && num === 1;
 				// Classic 2: middle disc in D3 and D5 is larger and completely red
 				const isMiddleDisc =
 					theme === "Classic 2" &&
@@ -738,10 +740,75 @@ const createTileGraphics = (face, palette, theme = "Classic") => {
 				// Classic 2: D9 has red discs in middle row (indices 3-5)
 				const isRedDiscD9 =
 					theme === "Classic 2" && num === 9 && i >= 3 && i <= 5;
-				const ringRadius = isMiddleDisc ? 12 : 9;
-				const fillRadius = isMiddleDisc ? 6 : 4;
-				const ringColor =
-					isMiddleDisc || isRedDiscD7 || isRedDiscD9 ? "#dc2626" : color;
+				const d1RingColor = "#047857";
+				const d1AccentColor = "#065f46";
+				const ringRadius = isFancyDiscD1 ? 19 : isMiddleDisc ? 12 : 9;
+				const fillRadius = isFancyDiscD1 ? 8 : isMiddleDisc ? 6 : 4;
+				const ringColor = isFancyDiscD1
+					? d1RingColor
+					: isMiddleDisc || isRedDiscD7 || isRedDiscD9
+						? "#dc2626"
+						: color;
+				if (isFancyDiscD1) {
+					g.appendChild(
+						svgEl("circle", {
+							cx: cx + dx,
+							cy: cy + dy,
+							r: 24,
+							fill: "none",
+							stroke: "#064e3b",
+							"stroke-width": 2,
+							"pointer-events": "none",
+						}),
+					);
+					g.appendChild(
+						svgEl("circle", {
+							cx: cx + dx,
+							cy: cy + dy,
+							r: 14,
+							fill: "none",
+							stroke: d1AccentColor,
+							"stroke-width": 2,
+							"pointer-events": "none",
+						}),
+					);
+					g.appendChild(
+						svgEl("circle", {
+							cx: cx + dx,
+							cy: cy + dy - 14,
+							r: 2,
+							fill: d1AccentColor,
+							"pointer-events": "none",
+						}),
+					);
+					g.appendChild(
+						svgEl("circle", {
+							cx: cx + dx + 14,
+							cy: cy + dy,
+							r: 2,
+							fill: d1AccentColor,
+							"pointer-events": "none",
+						}),
+					);
+					g.appendChild(
+						svgEl("circle", {
+							cx: cx + dx,
+							cy: cy + dy + 14,
+							r: 2,
+							fill: d1AccentColor,
+							"pointer-events": "none",
+						}),
+					);
+					g.appendChild(
+						svgEl("circle", {
+							cx: cx + dx - 14,
+							cy: cy + dy,
+							r: 2,
+							fill: d1AccentColor,
+							"pointer-events": "none",
+						}),
+					);
+				}
 				g.appendChild(
 					svgEl("circle", {
 						cx: cx + dx,
