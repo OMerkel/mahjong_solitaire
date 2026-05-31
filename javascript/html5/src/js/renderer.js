@@ -206,267 +206,325 @@ const createTileGraphics = (face, palette, theme = "Classic") => {
 			const num = parseInt(face[1], 10);
 
 			if (num === 1) {
-				// B1 "Bird": elaborate side-view multicolored bird with rich detail
-				const darkColor = color;
-				const _lightColor = palette.fill;
-				const accentColor = theme === "Ink" ? "#f59e0b" : "#fbbf24"; // Warm amber/gold
-				const wingshadow = theme === "Ink" ? "#4c1d95" : "#166534"; // Darker wing tone
-				const bx = cx + 6;
-				const by = cy;
+				if (theme === "Classic 2") {
+					const bird = svgEl("g", {
+						transform: `translate(${cx - 32} ${cy - 32}) scale(0.072 0.076)`,
+						"pointer-events": "none",
+					});
 
-				// Back/rump - darker shaded area
-				g.appendChild(
-					svgEl("ellipse", {
-						cx: bx - 8,
-						cy: by - 2,
-						rx: 8,
-						ry: 10,
-						fill: wingshadow,
-						opacity: "0.7",
-					}),
-				);
+					bird.appendChild(
+						svgEl("path", {
+							d: "M 180 170 L 180 225 L 180 280 L 270 430 L 370 685 L 800 560 L 510 465 L 390 380 L 320 220 L 230 150 Z",
+							fill: "#ffffff",
+						}),
+					);
+					bird.appendChild(
+						svgEl("path", {
+							d: "M 180 280 L 155 305 L 170 480 L 210 590 L 280 660 L 370 685 L 270 430 Z",
+							fill: "#e62227",
+						}),
+					);
+					bird.appendChild(
+						svgEl("path", {
+							d: "M 180 170 L 150 155 L 180 100 L 420 100 L 515 100 L 440 135 L 540 280 L 680 310 L 880 190 L 925 230 L 850 270 L 940 290 L 865 325 L 950 350 L 870 385 L 955 415 L 945 465 L 510 465 L 390 380 L 320 220 L 230 150 Z",
+							fill: "#00a877",
+						}),
+					);
+					bird.appendChild(
+						svgEl("path", {
+							d: "M 180 215 L 45 210 L 180 238 Z",
+							fill: "#1a1818",
+						}),
+					);
+					bird.appendChild(
+						svgEl("path", {
+							d: "M 180 244 L 55 260 L 180 275 Z",
+							fill: "#1a1818",
+						}),
+					);
+					bird.appendChild(
+						svgEl("circle", {
+							cx: 265,
+							cy: 225,
+							r: 34,
+							fill: "#1a1818",
+						}),
+					);
+					bird.appendChild(
+						svgEl("path", {
+							d: "M 330 670 L 370 685 L 550 640 L 750 575 L 800 560 L 930 520 L 935 530 L 860 565 L 930 605 L 750 635 L 550 675 L 370 710 Z",
+							fill: "#1a1818",
+						}),
+					);
+					g.appendChild(bird);
+				} else {
+					// B1 "Bird": elaborate side-view multicolored bird with rich detail
+					const darkColor = color;
+					const _lightColor = palette.fill;
+					const accentColor = theme === "Ink" ? "#f59e0b" : "#fbbf24"; // Warm amber/gold
+					const wingshadow = theme === "Ink" ? "#4c1d95" : "#166534"; // Darker wing tone
+					const bx = cx + 6;
+					const by = cy;
 
-				// Main body - teardrop ellipse
-				g.appendChild(
-					svgEl("ellipse", {
-						cx: bx + 2,
-						cy: by + 4,
-						rx: 14,
-						ry: 17,
-						fill: darkColor,
-						opacity: "0.95",
-					}),
-				);
+					// Back/rump - darker shaded area
+					g.appendChild(
+						svgEl("ellipse", {
+							cx: bx - 8,
+							cy: by - 2,
+							rx: 8,
+							ry: 10,
+							fill: wingshadow,
+							opacity: "0.7",
+						}),
+					);
 
-				// Breast/underside - lighter cream color
-				g.appendChild(
-					svgEl("ellipse", {
-						cx: bx + 4,
-						cy: by + 8,
-						rx: 9,
-						ry: 12,
-						fill: accentColor,
-						opacity: "0.4",
-					}),
-				);
+					// Main body - teardrop ellipse
+					g.appendChild(
+						svgEl("ellipse", {
+							cx: bx + 2,
+							cy: by + 4,
+							rx: 14,
+							ry: 17,
+							fill: darkColor,
+							opacity: "0.95",
+						}),
+					);
 
-				// Wing - large curved filled shape
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 8} ${by - 4} Q ${bx - 28} ${by - 8} ${bx - 30} ${by + 10} Q ${bx - 20} ${by + 18} ${bx - 6} ${by + 12}`,
-						stroke: darkColor,
-						"stroke-width": 0.5,
-						fill: wingshadow,
-						opacity: "0.85",
-					}),
-				);
+					// Breast/underside - lighter cream color
+					g.appendChild(
+						svgEl("ellipse", {
+							cx: bx + 4,
+							cy: by + 8,
+							rx: 9,
+							ry: 12,
+							fill: accentColor,
+							opacity: "0.4",
+						}),
+					);
 
-				// Wing feather detail - stripes
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 15} ${by} Q ${bx - 22} ${by - 2} ${bx - 24} ${by + 4}`,
-						stroke: darkColor,
-						"stroke-width": 1.5,
-						fill: "none",
-						opacity: "0.6",
-					}),
-				);
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 12} ${by + 2} Q ${bx - 20} ${by + 2} ${bx - 22} ${by + 10}`,
-						stroke: darkColor,
-						"stroke-width": 1.5,
-						fill: "none",
-						opacity: "0.6",
-					}),
-				);
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 10} ${by + 6} Q ${bx - 18} ${by + 8} ${bx - 20} ${by + 14}`,
-						stroke: darkColor,
-						"stroke-width": 1.5,
-						fill: "none",
-						opacity: "0.6",
-					}),
-				);
+					// Wing - large curved filled shape
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 8} ${by - 4} Q ${bx - 28} ${by - 8} ${bx - 30} ${by + 10} Q ${bx - 20} ${by + 18} ${bx - 6} ${by + 12}`,
+							stroke: darkColor,
+							"stroke-width": 0.5,
+							fill: wingshadow,
+							opacity: "0.85",
+						}),
+					);
 
-				// Neck - curved bridge
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx + 8} ${by - 8} Q ${bx + 12} ${by - 14} ${bx + 14} ${by - 20}`,
-						stroke: darkColor,
-						"stroke-width": 4,
-						fill: "none",
-						"stroke-linecap": "round",
-					}),
-				);
+					// Wing feather detail - stripes
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 15} ${by} Q ${bx - 22} ${by - 2} ${bx - 24} ${by + 4}`,
+							stroke: darkColor,
+							"stroke-width": 1.5,
+							fill: "none",
+							opacity: "0.6",
+						}),
+					);
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 12} ${by + 2} Q ${bx - 20} ${by + 2} ${bx - 22} ${by + 10}`,
+							stroke: darkColor,
+							"stroke-width": 1.5,
+							fill: "none",
+							opacity: "0.6",
+						}),
+					);
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 10} ${by + 6} Q ${bx - 18} ${by + 8} ${bx - 20} ${by + 14}`,
+							stroke: darkColor,
+							"stroke-width": 1.5,
+							fill: "none",
+							opacity: "0.6",
+						}),
+					);
 
-				// Head - side profile circle
-				g.appendChild(
-					svgEl("circle", { cx: bx + 16, cy: by - 22, r: 9, fill: darkColor }),
-				);
+					// Neck - curved bridge
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx + 8} ${by - 8} Q ${bx + 12} ${by - 14} ${bx + 14} ${by - 20}`,
+							stroke: darkColor,
+							"stroke-width": 4,
+							fill: "none",
+							"stroke-linecap": "round",
+						}),
+					);
 
-				// Head crest/crown detail
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx + 18} ${by - 31} L ${bx + 22} ${by - 28} L ${bx + 20} ${by - 26}`,
-						stroke: darkColor,
-						"stroke-width": 2,
-						fill: darkColor,
-						"stroke-linejoin": "round",
-					}),
-				);
+					// Head - side profile circle
+					g.appendChild(
+						svgEl("circle", {
+							cx: bx + 16,
+							cy: by - 22,
+							r: 9,
+							fill: darkColor,
+						}),
+					);
 
-				// Head highlight/cap
-				g.appendChild(
-					svgEl("ellipse", {
-						cx: bx + 14,
-						cy: by - 24,
-						rx: 3,
-						ry: 4,
-						fill: accentColor,
-						opacity: "0.5",
-					}),
-				);
+					// Head crest/crown detail
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx + 18} ${by - 31} L ${bx + 22} ${by - 28} L ${bx + 20} ${by - 26}`,
+							stroke: darkColor,
+							"stroke-width": 2,
+							fill: darkColor,
+							"stroke-linejoin": "round",
+						}),
+					);
 
-				// Eye - large and expressive
-				g.appendChild(
-					svgEl("circle", { cx: bx + 20, cy: by - 22, r: 3, fill: "#fff" }),
-				);
-				g.appendChild(
-					svgEl("circle", { cx: bx + 21, cy: by - 23, r: 1.8, fill: "#000" }),
-				);
+					// Head highlight/cap
+					g.appendChild(
+						svgEl("ellipse", {
+							cx: bx + 14,
+							cy: by - 24,
+							rx: 3,
+							ry: 4,
+							fill: accentColor,
+							opacity: "0.5",
+						}),
+					);
 
-				// Beak - pointed triangle pointing right
-				g.appendChild(
-					svgEl("polygon", {
-						points: `${bx + 22},${by - 20} ${bx + 32},${by - 18} ${bx + 22},${by - 16}`,
-						fill: "#d97706",
-					}),
-				);
-				g.appendChild(
-					svgEl("polygon", {
-						points: `${bx + 22},${by - 20} ${bx + 32},${by - 18} ${bx + 22},${by - 16}`,
-						stroke: "#b45309",
-						"stroke-width": 0.5,
-						fill: "none",
-					}),
-				);
+					// Eye - large and expressive
+					g.appendChild(
+						svgEl("circle", { cx: bx + 20, cy: by - 22, r: 3, fill: "#fff" }),
+					);
+					g.appendChild(
+						svgEl("circle", { cx: bx + 21, cy: by - 23, r: 1.8, fill: "#000" }),
+					);
 
-				// Tail - fan of feathers extending left and down
-				// Tail base
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 20} ${by + 8} L ${bx - 32} ${by + 10}`,
-						stroke: darkColor,
-						"stroke-width": 4,
-						"stroke-linecap": "round",
-					}),
-				);
-				// Upper tail feather
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 20} ${by + 4} Q ${bx - 28} ${by - 2} ${bx - 34} ${by - 4}`,
-						stroke: darkColor,
-						"stroke-width": 3,
-						fill: "none",
-						"stroke-linecap": "round",
-					}),
-				);
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 20} ${by + 4} Q ${bx - 28} ${by - 2} ${bx - 34} ${by - 4}`,
-						stroke: accentColor,
-						"stroke-width": 1,
-						fill: "none",
-						"stroke-linecap": "round",
-						opacity: "0.6",
-					}),
-				);
+					// Beak - pointed triangle pointing right
+					g.appendChild(
+						svgEl("polygon", {
+							points: `${bx + 22},${by - 20} ${bx + 32},${by - 18} ${bx + 22},${by - 16}`,
+							fill: "#d97706",
+						}),
+					);
+					g.appendChild(
+						svgEl("polygon", {
+							points: `${bx + 22},${by - 20} ${bx + 32},${by - 18} ${bx + 22},${by - 16}`,
+							stroke: "#b45309",
+							"stroke-width": 0.5,
+							fill: "none",
+						}),
+					);
 
-				// Middle tail feather
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 20} ${by + 8} Q ${bx - 32} ${by + 12} ${bx - 38} ${by + 16}`,
-						stroke: darkColor,
-						"stroke-width": 3,
-						fill: "none",
-						"stroke-linecap": "round",
-					}),
-				);
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 20} ${by + 8} Q ${bx - 32} ${by + 12} ${bx - 38} ${by + 16}`,
-						stroke: accentColor,
-						"stroke-width": 1,
-						fill: "none",
-						"stroke-linecap": "round",
-						opacity: "0.6",
-					}),
-				);
+					// Tail - fan of feathers extending left and down
+					// Tail base
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 20} ${by + 8} L ${bx - 32} ${by + 10}`,
+							stroke: darkColor,
+							"stroke-width": 4,
+							"stroke-linecap": "round",
+						}),
+					);
+					// Upper tail feather
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 20} ${by + 4} Q ${bx - 28} ${by - 2} ${bx - 34} ${by - 4}`,
+							stroke: darkColor,
+							"stroke-width": 3,
+							fill: "none",
+							"stroke-linecap": "round",
+						}),
+					);
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 20} ${by + 4} Q ${bx - 28} ${by - 2} ${bx - 34} ${by - 4}`,
+							stroke: accentColor,
+							"stroke-width": 1,
+							fill: "none",
+							"stroke-linecap": "round",
+							opacity: "0.6",
+						}),
+					);
 
-				// Lower tail feather
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 20} ${by + 12} Q ${bx - 28} ${by + 22} ${bx - 34} ${by + 28}`,
-						stroke: darkColor,
-						"stroke-width": 3,
-						fill: "none",
-						"stroke-linecap": "round",
-					}),
-				);
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 20} ${by + 12} Q ${bx - 28} ${by + 22} ${bx - 34} ${by + 28}`,
-						stroke: accentColor,
-						"stroke-width": 1,
-						fill: "none",
-						"stroke-linecap": "round",
-						opacity: "0.6",
-					}),
-				);
+					// Middle tail feather
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 20} ${by + 8} Q ${bx - 32} ${by + 12} ${bx - 38} ${by + 16}`,
+							stroke: darkColor,
+							"stroke-width": 3,
+							fill: "none",
+							"stroke-linecap": "round",
+						}),
+					);
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 20} ${by + 8} Q ${bx - 32} ${by + 12} ${bx - 38} ${by + 16}`,
+							stroke: accentColor,
+							"stroke-width": 1,
+							fill: "none",
+							"stroke-linecap": "round",
+							opacity: "0.6",
+						}),
+					);
 
-				// Legs - thin and realistic
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 4} ${by + 21} L ${bx - 4} ${by + 32}`,
-						stroke: "#8b6f47",
-						"stroke-width": 2,
-						"stroke-linecap": "round",
-					}),
-				);
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx + 6} ${by + 21} L ${bx + 6} ${by + 32}`,
-						stroke: "#8b6f47",
-						"stroke-width": 2,
-						"stroke-linecap": "round",
-					}),
-				);
+					// Lower tail feather
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 20} ${by + 12} Q ${bx - 28} ${by + 22} ${bx - 34} ${by + 28}`,
+							stroke: darkColor,
+							"stroke-width": 3,
+							fill: "none",
+							"stroke-linecap": "round",
+						}),
+					);
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 20} ${by + 12} Q ${bx - 28} ${by + 22} ${bx - 34} ${by + 28}`,
+							stroke: accentColor,
+							"stroke-width": 1,
+							fill: "none",
+							"stroke-linecap": "round",
+							opacity: "0.6",
+						}),
+					);
 
-				// Feet - simple three-toe marks
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx - 6} ${by + 32} L ${bx - 2} ${by + 32}`,
-						stroke: "#8b6f47",
-						"stroke-width": 1.5,
-						"stroke-linecap": "round",
-					}),
-				);
-				g.appendChild(
-					svgEl("path", {
-						d: `M ${bx + 4} ${by + 32} L ${bx + 8} ${by + 32}`,
-						stroke: "#8b6f47",
-						"stroke-width": 1.5,
-						"stroke-linecap": "round",
-					}),
-				);
-				g.appendChild(
-					svgEl("circle", { cx: bx - 4, cy: by + 33, r: 1, fill: "#8b6f47" }),
-				);
-				g.appendChild(
-					svgEl("circle", { cx: bx + 6, cy: by + 33, r: 1, fill: "#8b6f47" }),
-				);
+					// Legs - thin and realistic
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 4} ${by + 21} L ${bx - 4} ${by + 32}`,
+							stroke: "#8b6f47",
+							"stroke-width": 2,
+							"stroke-linecap": "round",
+						}),
+					);
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx + 6} ${by + 21} L ${bx + 6} ${by + 32}`,
+							stroke: "#8b6f47",
+							"stroke-width": 2,
+							"stroke-linecap": "round",
+						}),
+					);
+
+					// Feet - simple three-toe marks
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx - 6} ${by + 32} L ${bx - 2} ${by + 32}`,
+							stroke: "#8b6f47",
+							"stroke-width": 1.5,
+							"stroke-linecap": "round",
+						}),
+					);
+					g.appendChild(
+						svgEl("path", {
+							d: `M ${bx + 4} ${by + 32} L ${bx + 8} ${by + 32}`,
+							stroke: "#8b6f47",
+							"stroke-width": 1.5,
+							"stroke-linecap": "round",
+						}),
+					);
+					g.appendChild(
+						svgEl("circle", { cx: bx - 4, cy: by + 33, r: 1, fill: "#8b6f47" }),
+					);
+					g.appendChild(
+						svgEl("circle", { cx: bx + 6, cy: by + 33, r: 1, fill: "#8b6f47" }),
+					);
+				}
 			} else if (num === 8) {
 				// B8: Like other bamboo but with more sophisticated layout
 				const layouts = {
@@ -742,6 +800,7 @@ const createTileGraphics = (face, palette, theme = "Classic") => {
 					theme === "Classic 2" && num === 9 && i >= 3 && i <= 5;
 				const d1RingColor = "#047857";
 				const d1AccentColor = "#065f46";
+				const d1CenterColor = "#dc2626";
 				const ringRadius = isFancyDiscD1 ? 19 : isMiddleDisc ? 12 : 9;
 				const fillRadius = isFancyDiscD1 ? 8 : isMiddleDisc ? 6 : 4;
 				const ringColor = isFancyDiscD1
@@ -786,7 +845,7 @@ const createTileGraphics = (face, palette, theme = "Classic") => {
 							cx: cx + dx + 14,
 							cy: cy + dy,
 							r: 2,
-							fill: d1AccentColor,
+							fill: "#1a1818",
 							"pointer-events": "none",
 						}),
 					);
@@ -804,7 +863,7 @@ const createTileGraphics = (face, palette, theme = "Classic") => {
 							cx: cx + dx - 14,
 							cy: cy + dy,
 							r: 2,
-							fill: d1AccentColor,
+							fill: "#1a1818",
 							"pointer-events": "none",
 						}),
 					);
@@ -824,7 +883,7 @@ const createTileGraphics = (face, palette, theme = "Classic") => {
 						cx: cx + dx,
 						cy: cy + dy,
 						r: fillRadius,
-						fill: ringColor,
+						fill: isFancyDiscD1 ? d1CenterColor : ringColor,
 					}),
 				);
 			}
