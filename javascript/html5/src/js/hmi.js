@@ -363,7 +363,10 @@ const updateHighscoreView = (scores, currentLayout = "ClassicTurtle") => {
 const renderHighscores = () => {
 	const next = refreshScorePeriods(loadScores());
 	saveScores(next);
-	const currentLayout = store.getState().settings.layout ?? "ClassicTurtle";
+	const currentLayout =
+		readSettings().layout ??
+		store.getState().settings.layout ??
+		"ClassicTurtle";
 	updateHighscoreView(next, currentLayout);
 };
 
