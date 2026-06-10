@@ -4,6 +4,10 @@ Browser-based Mahjong Solitaire implemented with modern JavaScript ES modules, f
 
 ![Mahjong icon](javascript/html5/src/img/icons/mahjong128.png)
 
+## Play Online
+
+- [Start game now...](https://omerkel.github.io/mahjong_solitaire/javascript/html5/src/)
+
 ## Features
 
 - Legal single-player Mahjong Solitaire with deterministic, seed-based board generation.
